@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect, useRef } from "react"
 import { ChatSidebar } from "@/components/whatsapp/chat-sidebar"
 import { ChatHeader } from "@/components/whatsapp/chat-header"
 import { MessageList } from "@/components/whatsapp/message-list"
@@ -184,20 +184,82 @@ export default function WhatsAppPage() {
   const [activeChat, setActiveChat] = useState("ai-saban")
   const [allMessages, setAllMessages] = useState(initialMessages)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [isThinking, setIsThinking] = useState(false)
+  const hasSentGreeting = useRef(false)
 
   const currentContact = contacts.find((c) => c.id === activeChat)
   const messages = allMessages[activeChat] || []
 
-  const handleSendMessage = useCallback(
-    (text: string) => {
-      const now = new Date()
-      const timeStr = now.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-      })
+  function getTimeStr() {
+    return new Date().toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })
+  }
 
-      const newMessage: Message = {
+  // Helper: call the assistant API and return the text response
+  async function callAssistantAPI(userText: string): Promise<string> {
+    const res = await fetch("/shahar/api/assistant", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: userText }),
+    })
+
+    if (!res.ok) {
+      throw new Error(`API error: ${res.status}`)
+    }
+
+    const data = await res.json()
+    // Support both { reply: "..." } and { message: "..." } response shapes
+    return data.reply || data.message || data.text || "I received your message."
+  }
+
+  // Send the initial AI greeting when the app loads
+  useEffect(() => {
+    if (hasSentGreeting.current) return
+    hasSentGreeting.current = true
+
+    async function sendGreeting() {
+      setIsThinking(true)
+      try {
+        const reply = await callAssistantAPI("__INIT_GREETING__")
+        const greetingMessage: Message = {
+          id: `ai-greeting-${Date.now()}`,
+          text: reply,
+          sender: "ai",
+          time: getTimeStr(),
+        }
+        setAllMessages((prev) => ({
+          ...prev,
+          "ai-saban": [...(prev["ai-saban"] || []), greetingMessage],
+        }))
+      } catch {
+        // If the API is unreachable, add a graceful fallback greeting
+        const fallback: Message = {
+          id: `ai-greeting-fallback-${Date.now()}`,
+          text: "Welcome to H. Saban Logistics. I'm your AI assistant \u2014 ready to help with shipment tracking, dispatch, route planning, and more. How can I assist you today?",
+          sender: "ai",
+          time: getTimeStr(),
+        }
+        setAllMessages((prev) => ({
+          ...prev,
+          "ai-saban": [...(prev["ai-saban"] || []), fallback],
+        }))
+      } finally {
+        setIsThinking(false)
+      }
+    }
+
+    sendGreeting()
+  }, [])
+
+  const handleSendMessage = useCallback(
+    async (text: string) => {
+      const timeStr = getTimeStr()
+
+      // 1. Add the user message immediately
+      const userMessage: Message = {
         id: `user-${Date.now()}`,
         text,
         sender: "user",
@@ -207,50 +269,46 @@ export default function WhatsAppPage() {
 
       setAllMessages((prev) => ({
         ...prev,
-        [activeChat]: [...(prev[activeChat] || []), newMessage],
+        [activeChat]: [...(prev[activeChat] || []), userMessage],
       }))
 
-      // Simulate AI reply
-      setTimeout(() => {
-        const replyMap: Record<string, string[]> = {
-          "ai-saban": [
-            "I\u2019ve updated the logistics dashboard. All metrics are green.",
-            "Checking the fleet tracker now\u2026 I\u2019ll have details in a moment.",
-            "Roger that. I\u2019ll coordinate with the dispatch team on this.",
-            "The shipment manifest has been updated accordingly.",
-            "I\u2019ve flagged this for priority handling. The ops team is notified.",
-          ],
-          shahar: [
-            "Route optimization complete. Fuel cost reduced by 12%.",
-            "I\u2019ll update the fleet schedule right away.",
-            "Driver availability confirmed for the requested time slot.",
-            "Noted. I\u2019ll prepare the route brief for the morning huddle.",
-          ],
-          rami: [
-            "Copy that. Dispatching the update to the driver now.",
-            "GPS shows the truck is 15 minutes from destination.",
-            "I\u2019ve logged the checkpoint clearance in the system.",
-            "All trucks are accounted for. No issues at the moment.",
-          ],
-          office: [
-            "New order logged. Awaiting warehouse confirmation.",
-            "I\u2019ve processed the approvals. Dispatch is scheduled.",
-            "The inventory check is complete. Stock levels are sufficient.",
-            "Order priority has been updated in the system.",
-          ],
-        }
-        const replies = replyMap[activeChat] || replyMap["ai-saban"]
-        const reply: Message = {
+      // 2. Call the API for a real AI response
+      setIsThinking(true)
+      try {
+        const reply = await callAssistantAPI(text)
+        const aiMessage: Message = {
           id: `ai-${Date.now()}`,
-          text: replies[Math.floor(Math.random() * replies.length)],
+          text: reply,
           sender: "ai",
-          time: timeStr,
+          time: getTimeStr(),
         }
         setAllMessages((prev) => ({
           ...prev,
-          [activeChat]: [...(prev[activeChat] || []), reply],
+          [activeChat]: [...(prev[activeChat] || []), aiMessage],
         }))
-      }, 1200)
+
+        // Update the user message status to "read"
+        setAllMessages((prev) => ({
+          ...prev,
+          [activeChat]: (prev[activeChat] || []).map((m) =>
+            m.id === userMessage.id ? { ...m, status: "read" as const } : m
+          ),
+        }))
+      } catch {
+        // On API failure, show a graceful error message from the AI
+        const errorMessage: Message = {
+          id: `ai-error-${Date.now()}`,
+          text: "I\u2019m having trouble connecting right now. Please try again in a moment.",
+          sender: "ai",
+          time: getTimeStr(),
+        }
+        setAllMessages((prev) => ({
+          ...prev,
+          [activeChat]: [...(prev[activeChat] || []), errorMessage],
+        }))
+      } finally {
+        setIsThinking(false)
+      }
     },
     [activeChat]
   )
@@ -274,8 +332,8 @@ export default function WhatsAppPage() {
           avatar={currentContact?.avatar || "?"}
           onToggleSidebar={() => setSidebarOpen(true)}
         />
-        <MessageList messages={messages} />
-        <MessageInput onSendMessage={handleSendMessage} />
+        <MessageList messages={messages} isThinking={isThinking} />
+        <MessageInput onSendMessage={handleSendMessage} disabled={isThinking} />
       </div>
     </main>
   )

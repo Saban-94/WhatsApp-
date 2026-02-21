@@ -5,14 +5,15 @@ import { Smile, Paperclip, Mic, SendHorizontal } from "lucide-react"
 
 interface MessageInputProps {
   onSendMessage: (text: string) => void
+  disabled?: boolean
 }
 
-export function MessageInput({ onSendMessage }: MessageInputProps) {
+export function MessageInput({ onSendMessage, disabled = false }: MessageInputProps) {
   const [text, setText] = useState("")
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (text.trim()) {
+    if (text.trim() && !disabled) {
       onSendMessage(text.trim())
       setText("")
     }
@@ -41,14 +42,16 @@ export function MessageInput({ onSendMessage }: MessageInputProps) {
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Type a message"
-            className="w-full bg-transparent text-sm text-[var(--wa-text-primary)] placeholder:text-[var(--wa-text-secondary)] outline-none"
+            placeholder={disabled ? "Ai-\u05D7.\u05E1\u05D1\u05DF is typing..." : "Type a message"}
+            disabled={disabled}
+            className="w-full bg-transparent text-sm text-[var(--wa-text-primary)] placeholder:text-[var(--wa-text-secondary)] outline-none disabled:opacity-50 disabled:cursor-not-allowed"
           />
         </div>
         {text.trim() ? (
           <button
             type="submit"
-            className="text-[var(--wa-text-secondary)] hover:text-[var(--wa-green)] transition-colors p-1"
+            disabled={disabled}
+            className="text-[var(--wa-text-secondary)] hover:text-[var(--wa-green)] transition-colors p-1 disabled:opacity-40 disabled:cursor-not-allowed"
             aria-label="Send message"
           >
             <SendHorizontal className="h-6 w-6" />

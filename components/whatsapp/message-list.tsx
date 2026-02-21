@@ -5,14 +5,15 @@ import { ChatBubble, type Message } from "./chat-bubble"
 
 interface MessageListProps {
   messages: Message[]
+  isThinking?: boolean
 }
 
-export function MessageList({ messages }: MessageListProps) {
+export function MessageList({ messages, isThinking = false }: MessageListProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [messages])
+  }, [messages, isThinking])
 
   return (
     <div className="flex-1 overflow-y-auto wa-scrollbar wa-chat-pattern px-4 py-4 sm:px-8 md:px-16">
@@ -37,6 +38,24 @@ export function MessageList({ messages }: MessageListProps) {
       {messages.map((message) => (
         <ChatBubble key={message.id} message={message} />
       ))}
+
+      {/* Typing indicator */}
+      {isThinking && (
+        <div className="flex justify-start mb-1">
+          <div className="rounded-lg bg-[var(--wa-incoming)] px-4 py-3 relative">
+            {/* Tail */}
+            <div
+              className="absolute top-0 -left-1.5 h-3 w-3 bg-[var(--wa-incoming)]"
+              style={{ clipPath: "polygon(100% 0, 0 0, 100% 100%)" }}
+            />
+            <div className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-[var(--wa-text-secondary)] animate-[bounce_1.4s_ease-in-out_infinite]" />
+              <span className="h-2 w-2 rounded-full bg-[var(--wa-text-secondary)] animate-[bounce_1.4s_ease-in-out_0.2s_infinite]" />
+              <span className="h-2 w-2 rounded-full bg-[var(--wa-text-secondary)] animate-[bounce_1.4s_ease-in-out_0.4s_infinite]" />
+            </div>
+          </div>
+        </div>
+      )}
 
       <div ref={bottomRef} />
     </div>
