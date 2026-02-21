@@ -20,10 +20,10 @@ export function ChatBubble({ message }: ChatBubbleProps) {
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} mb-1`}>
       <div
-        className={`relative max-w-[65%] rounded-lg px-3 py-1.5 ${
+        className={`relative max-w-[85%] rounded-lg px-3 py-1.5 sm:max-w-[65%] ${
           isUser
-            ? "bg-[var(--wa-outgoing)] text-[var(--wa-text-primary)]"
-            : "bg-[var(--wa-incoming)] text-[var(--wa-text-primary)]"
+            ? "bg-[var(--wa-outgoing)] text-[var(--wa-outgoing-text)]"
+            : "bg-[var(--wa-incoming)] text-[var(--wa-incoming-text)]"
         }`}
       >
         {/* Tail */}
@@ -42,16 +42,16 @@ export function ChatBubble({ message }: ChatBubbleProps) {
 
         <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.text}</p>
 
-        <div className={`flex items-center gap-1 mt-0.5 ${isUser ? "justify-end" : "justify-end"}`}>
-          <span className="text-[10px] text-[var(--wa-text-secondary)]">{message.time}</span>
+        <div className="flex items-center gap-1 mt-0.5 justify-end">
+          <span className="text-[10px] text-[var(--wa-time-text)]">{message.time}</span>
           {isUser && message.status && (
             <span className="ml-0.5">
               {message.status === "read" ? (
                 <CheckCheck className="h-3.5 w-3.5 text-[#53bdeb]" />
               ) : message.status === "delivered" ? (
-                <CheckCheck className="h-3.5 w-3.5 text-[var(--wa-text-secondary)]" />
+                <CheckCheck className="h-3.5 w-3.5 text-[var(--wa-time-text)]" />
               ) : (
-                <Check className="h-3.5 w-3.5 text-[var(--wa-text-secondary)]" />
+                <Check className="h-3.5 w-3.5 text-[var(--wa-time-text)]" />
               )}
             </span>
           )}

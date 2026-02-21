@@ -4,49 +4,58 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #0b141a;
-  --foreground: #e9edef;
-  --card: #111b21;
-  --card-foreground: #e9edef;
-  --popover: #111b21;
-  --popover-foreground: #e9edef;
+  --background: #eae6df;
+  --foreground: #111b21;
+  --card: #ffffff;
+  --card-foreground: #111b21;
+  --popover: #ffffff;
+  --popover-foreground: #111b21;
   --primary: #00a884;
-  --primary-foreground: #111b21;
-  --secondary: #202c33;
-  --secondary-foreground: #e9edef;
-  --muted: #182229;
-  --muted-foreground: #8696a0;
-  --accent: #2a3942;
-  --accent-foreground: #e9edef;
+  --primary-foreground: #ffffff;
+  --secondary: #f0f2f5;
+  --secondary-foreground: #111b21;
+  --muted: #f0f2f5;
+  --muted-foreground: #667781;
+  --accent: #e9edef;
+  --accent-foreground: #111b21;
   --destructive: #ea4335;
   --destructive-foreground: #ffffff;
-  --border: #2a3942;
-  --input: #2a3942;
+  --border: #e9edef;
+  --input: #e9edef;
   --ring: #00a884;
   --chart-1: #00a884;
   --chart-2: #53bdeb;
-  --chart-3: #8696a0;
+  --chart-3: #667781;
   --chart-4: #005c4b;
-  --chart-5: #e9edef;
+  --chart-5: #111b21;
   --radius: 0.5rem;
-  --sidebar: #111b21;
-  --sidebar-foreground: #e9edef;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #111b21;
   --sidebar-primary: #00a884;
-  --sidebar-primary-foreground: #111b21;
-  --sidebar-accent: #2a3942;
-  --sidebar-accent-foreground: #e9edef;
-  --sidebar-border: #2a3942;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0f2f5;
+  --sidebar-accent-foreground: #111b21;
+  --sidebar-border: #e9edef;
   --sidebar-ring: #00a884;
 
-  --wa-chat-bg: #0b141a;
-  --wa-outgoing: #005c4b;
-  --wa-incoming: #202c33;
-  --wa-header: #202c33;
-  --wa-panel: #111b21;
-  --wa-hover: #2a3942;
+  --wa-chat-bg: #eae6df;
+  --wa-outgoing: #d9fdd3;
+  --wa-incoming: #ffffff;
+  --wa-header: #f0f2f5;
+  --wa-panel: #ffffff;
+  --wa-hover: #f0f2f5;
   --wa-green: #00a884;
-  --wa-text-primary: #e9edef;
-  --wa-text-secondary: #8696a0;
+  --wa-text-primary: #111b21;
+  --wa-text-secondary: #667781;
+  --wa-outgoing-text: #111b21;
+  --wa-incoming-text: #111b21;
+  --wa-time-text: #667781;
+  --wa-pattern-fill: %23d4cfc6;
+  --wa-pattern-opacity: 0.4;
+  --wa-encrypt-bg: #fdf4c5;
+  --wa-encrypt-text: #54656f;
+  --wa-divider-bg: #fdf4c5;
+  --wa-divider-text: #54656f;
 }
 
 .dark {
@@ -82,6 +91,25 @@
   --sidebar-accent-foreground: #e9edef;
   --sidebar-border: #2a3942;
   --sidebar-ring: #00a884;
+
+  --wa-chat-bg: #0b141a;
+  --wa-outgoing: #005c4b;
+  --wa-incoming: #202c33;
+  --wa-header: #202c33;
+  --wa-panel: #111b21;
+  --wa-hover: #2a3942;
+  --wa-green: #00a884;
+  --wa-text-primary: #e9edef;
+  --wa-text-secondary: #8696a0;
+  --wa-outgoing-text: #e9edef;
+  --wa-incoming-text: #e9edef;
+  --wa-time-text: #8696a0;
+  --wa-pattern-fill: %23182229;
+  --wa-pattern-opacity: 0.6;
+  --wa-encrypt-bg: #182229;
+  --wa-encrypt-text: #8b9ea7;
+  --wa-divider-bg: #182229;
+  --wa-divider-text: #8b9ea7;
 }
 
 @theme inline {
@@ -137,6 +165,10 @@
 /* WhatsApp chat background pattern */
 .wa-chat-pattern {
   background-color: var(--wa-chat-bg);
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='var(--wa-pattern-fill)' fill-opacity='var(--wa-pattern-opacity)'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.dark .wa-chat-pattern {
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23182229' fill-opacity='0.6'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -148,9 +180,15 @@
   background: transparent;
 }
 .wa-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #374045;
+  background-color: #c1c1c1;
   border-radius: 3px;
 }
 .wa-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #a8a8a8;
+}
+.dark .wa-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #374045;
+}
+.dark .wa-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #4a5568;
 }

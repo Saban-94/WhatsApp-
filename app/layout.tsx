@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -14,8 +15,8 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'WhatsApp Web',
-  description: 'WhatsApp Web Clone - Ai-Saban Chat',
+  title: 'Ai-\u05D7.\u05E1\u05D1\u05DF | H. Saban Logistics',
+  description: 'AI-Powered logistics assistant for H. Saban - Fleet management, dispatch, and shipment tracking',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -42,9 +43,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased overflow-hidden">
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>
