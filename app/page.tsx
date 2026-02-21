@@ -200,17 +200,21 @@ export default function WhatsAppPage() {
 
   // Helper: call the assistant API and return the text response
   async function callAssistantAPI(userText: string): Promise<string> {
+    console.log("[v0] Sending to /shahar/api/assistant:", userText)
     const res = await fetch("/shahar/api/assistant", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: userText }),
     })
 
+    console.log("[v0] API response status:", res.status)
+
     if (!res.ok) {
       throw new Error(`API error: ${res.status}`)
     }
 
     const data = await res.json()
+    console.log("[v0] API response data:", data)
     // Support both { reply: "..." } and { message: "..." } response shapes
     return data.reply || data.message || data.text || "I received your message."
   }
