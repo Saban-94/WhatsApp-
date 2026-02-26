@@ -17,13 +17,18 @@
       {
         "name": "next"
       }
-  {
-  "compilerOptions": {
+    ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
-    },
+      "@/*": ["./src/*", "./*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/**/*"
+  ],
   "exclude": ["node_modules"]
 }
