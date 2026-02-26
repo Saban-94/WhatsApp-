@@ -8,9 +8,12 @@
     "start": "next start",
     "lint": "eslint ."
   },
-  "dependencies": {
+    "dependencies": {
     "@google/generative-ai": "^0.21.0",
-    "@supabase/supabase-js": "^2.45.4"
+    "@supabase/supabase-js": "^2.45.4",
+    "next": "15.1.6", 
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
     "@hookform/resolvers": "^3.9.1",
     "@vercel/analytics": "1.6.1",
     "@radix-ui/react-accordion": "1.2.12",
