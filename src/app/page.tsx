@@ -10,39 +10,39 @@ import type { Message } from "@/components/whatsapp/chat-bubble"
 const contacts = [
   {
     id: "ai-saban",
-    name: "Ai-\u05D7.\u05E1\u05D1\u05DF",
-    lastMessage: "Shipment #4821 is on schedule.",
+    name: "Ai-ח.סבן",
+    lastMessage: "משלוח #4821 בלוח הזמנים.",
     time: "10:32 AM",
     unread: 2,
-    avatar: "\u05D7",
-    role: "AI Assistant",
+    avatar: "ח",
+    role: "עוזר AI",
   },
   {
     id: "shahar",
-    name: "Shahar",
-    lastMessage: "Route B confirmed for tomorrow",
+    name: "שחר",
+    lastMessage: "מסלול ב' אושר למחר",
     time: "9:15 AM",
     unread: 0,
     avatar: "S",
-    role: "Fleet Manager",
+    role: "מנהל צי רכב",
   },
   {
     id: "rami",
-    name: "Rami - Dispatcher",
-    lastMessage: "Truck 7 cleared checkpoint",
+    name: "רמי - סדרן",
+    lastMessage: "משאית 7 עברה את המחסום",
     time: "8:50 AM",
     unread: 3,
     avatar: "R",
-    role: "Dispatcher",
+    role: "סדרן עבודה",
   },
   {
     id: "office",
-    name: "Office Orders",
-    lastMessage: "3 new orders pending approval",
-    time: "Yesterday",
+    name: "הזמנות משרד",
+    lastMessage: "3 הזמנות חדשות ממתינות לאישור",
+    time: "אתמול",
     unread: 5,
     avatar: "O",
-    role: "Orders Channel",
+    role: "ערוץ הזמנות",
   },
 ]
 
@@ -50,40 +50,40 @@ const initialMessages: Record<string, Message[]> = {
   "ai-saban": [
     {
       id: "1",
-      text: "Good morning! Can you give me a status update on today\u2019s shipments?",
+      text: "בוקר טוב! אפשר לקבל עדכון סטטוס על המשלוחים של היום?",
       sender: "user",
       time: "10:20 AM",
       status: "read",
     },
     {
       id: "2",
-      text: "Good morning! Here\u2019s the overview for today:\n\n\u2022 Shipment #4819 \u2013 Delivered at 08:45\n\u2022 Shipment #4820 \u2013 In transit, ETA 13:00\n\u2022 Shipment #4821 \u2013 Loaded, departing at 11:00\n\u2022 Shipment #4822 \u2013 Awaiting pickup confirmation\n\nAll routes are clear. No delays reported.",
+      text: "בוקר טוב! הנה הסקירה להיום:\n\n• משלוח #4819 – נמסר ב-08:45\n• משלוח #4820 – בדרך, זמן הגעה משוער 13:00\n• משלוח #4821 – הועמס, יוצא ב-11:00\n• משלוח #4822 – ממתין לאישור איסוף\n\nכל המסלולים פנויים. לא דווחו עיכובים.",
       sender: "ai",
       time: "10:20 AM",
     },
     {
       id: "3",
-      text: "Great. What about Truck 12? Rami mentioned an issue yesterday.",
+      text: "מעולה. מה לגבי משאית 12? רמי הזכיר בעיה אתמול.",
       sender: "user",
       time: "10:25 AM",
       status: "read",
     },
     {
       id: "4",
-      text: "Truck 12 had a minor brake inspection flag yesterday. It was serviced overnight and passed all checks this morning. Currently assigned to Shipment #4821 and is road-ready.",
+      text: "משאית 12 קיבלה התראת בדיקת בלמים אתמול. היא טופלה במהלך הלילה ועברה את כל הבדיקות הבוקר. כרגע משויכת למשלוח #4821 ומוכנה לנסיעה.",
       sender: "ai",
       time: "10:26 AM",
     },
     {
       id: "5",
-      text: "Perfect. Can you notify the client for #4821 that we\u2019re on schedule?",
+      text: "מצוין. אפשר להודיע ללקוח של #4821 שאנחנו בלוח הזמנים?",
       sender: "user",
       time: "10:30 AM",
       status: "read",
     },
     {
       id: "6",
-      text: "Shipment #4821 is on schedule. I\u2019ve sent an automated ETA notification to the client. They\u2019ll receive a delivery window of 14:00\u201315:00. I\u2019ll also send a live tracking link once the truck departs.",
+      text: "משלוח #4821 בלוח הזמנים. שלחתי הודעת זמן הגעה אוטומטית ללקוח. הם יקבלו חלון מסירה של 14:00–15:00. אשלח גם קישור למעקב חי ברגע שהמשאית תצא.",
       sender: "ai",
       time: "10:32 AM",
     },
@@ -91,27 +91,27 @@ const initialMessages: Record<string, Message[]> = {
   shahar: [
     {
       id: "1",
-      text: "Shahar, did you finalize the route plan for tomorrow\u2019s Haifa run?",
+      text: "שחר, סגרת את תוכנית המסלול לנסיעה לחיפה מחר?",
       sender: "user",
       time: "9:00 AM",
       status: "read",
     },
     {
       id: "2",
-      text: "Yes! Route B via Highway 6 is the fastest option. I\u2019ve accounted for the construction near Netanya. ETA should be 2.5 hours.",
+      text: "כן! מסלול ב' דרך כביש 6 הוא האופציה המהירה ביותר. לקחתי בחשבון את העבודות ליד נתניה. זמן הגעה משוער שעתיים וחצי.",
       sender: "ai",
       time: "9:05 AM",
     },
     {
       id: "3",
-      text: "Good call. Assign Trucks 3 and 8 to that route.",
+      text: "החלטה טובה. תשייך את משאיות 3 ו-8 למסלול הזה.",
       sender: "user",
       time: "9:10 AM",
       status: "read",
     },
     {
       id: "4",
-      text: "Done. Both trucks are assigned and drivers have been notified. Route B confirmed for tomorrow.",
+      text: "בוצע. שתי המשאיות שויכו והנהגים קיבלו הודעה. מסלול ב' אושר למחר.",
       sender: "ai",
       time: "9:15 AM",
     },
@@ -119,27 +119,27 @@ const initialMessages: Record<string, Message[]> = {
   rami: [
     {
       id: "1",
-      text: "Rami, where\u2019s Truck 7 right now?",
+      text: "רמי, איפה משאית 7 כרגע?",
       sender: "user",
       time: "8:40 AM",
       status: "read",
     },
     {
       id: "2",
-      text: "Truck 7 just passed the Ashdod checkpoint. Driver confirmed all cargo is secure. Should arrive at the port terminal in about 20 minutes.",
+      text: "משאית 7 בדיוק עברה את מחסום אשדוד. הנהג אישר שכל המטען מאובטח. אמור להגיע לטרמינל בנמל בעוד כ-20 דקות.",
       sender: "ai",
       time: "8:42 AM",
     },
     {
       id: "3",
-      text: "Tell the driver to radio in when he arrives at Gate 4.",
+      text: "תגיד לנהג לעלות מולנו בקשר כשהוא מגיע לשער 4.",
       sender: "user",
       time: "8:45 AM",
       status: "read",
     },
     {
       id: "4",
-      text: "Truck 7 cleared checkpoint. Driver confirmed \u2013 will radio at Gate 4 upon arrival.",
+      text: "משאית 7 עברה מחסום. הנהג אישר – יצור קשר בשער 4 עם ההגעה.",
       sender: "ai",
       time: "8:50 AM",
     },
@@ -147,33 +147,33 @@ const initialMessages: Record<string, Message[]> = {
   office: [
     {
       id: "1",
-      text: "We received 3 new shipping orders this morning from the Be\u2019er Sheva depot.",
+      text: "קיבלנו הבוקר 3 הזמנות שילוח חדשות ממחסן באר שבע.",
       sender: "ai",
       time: "4:10 PM",
     },
     {
       id: "2",
-      text: "What\u2019s the cargo type and priority?",
+      text: "מה סוג המטען והעדיפות?",
       sender: "user",
       time: "4:15 PM",
       status: "read",
     },
     {
       id: "3",
-      text: "Order #901 \u2013 Electronics, High Priority\nOrder #902 \u2013 Construction materials, Standard\nOrder #903 \u2013 Refrigerated goods, Urgent\n\nAll three are pending your approval for scheduling.",
+      text: "הזמנה #901 – אלקטרוניקה, עדיפות גבוהה\nהזמנה #902 – חומרי בניין, רגיל\nהזמנה #903 – סחורה בקירור, דחוף\n\nשלושתן ממתינות לאישור שלך לתזמון.",
       sender: "ai",
       time: "4:18 PM",
     },
     {
       id: "4",
-      text: "Approve #901 and #903 immediately. Hold #902 for tomorrow\u2019s batch.",
+      text: "תאשר את #901 ו-#903 מיד. את #902 תשמור לסבב של מחר.",
       sender: "user",
       time: "4:20 PM",
       status: "delivered",
     },
     {
       id: "5",
-      text: "3 new orders pending approval. #901 and #903 are approved and queued for dispatch. #902 is on hold for tomorrow.",
+      text: "3 הזמנות ממתינות לאישור. #901 ו-#903 אושרו ונכנסו לתור לשיגור. #902 בהמתנה למחר.",
       sender: "ai",
       time: "4:22 PM",
     },
@@ -191,35 +191,28 @@ export default function WhatsAppPage() {
   const messages = allMessages[activeChat] || []
 
   function getTimeStr() {
-    return new Date().toLocaleTimeString("en-US", {
+    return new Date().toLocaleTimeString("he-IL", {
       hour: "numeric",
       minute: "2-digit",
-      hour12: true,
+      hour12: false,
     })
   }
 
-  // Helper: call the assistant API and return the text response
   async function callAssistantAPI(userText: string): Promise<string> {
-    console.log("[v0] Sending to /shahar/api/assistant:", userText)
     const res = await fetch("/shahar/api/assistant", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: userText }),
     })
 
-    console.log("[v0] API response status:", res.status)
-
     if (!res.ok) {
       throw new Error(`API error: ${res.status}`)
     }
 
     const data = await res.json()
-    console.log("[v0] API response data:", data)
-    // Support both { reply: "..." } and { message: "..." } response shapes
-    return data.reply || data.message || data.text || "I received your message."
+    return data.reply || data.message || data.text || "ההודעה התקבלה."
   }
 
-  // Send the initial AI greeting when the app loads
   useEffect(() => {
     if (hasSentGreeting.current) return
     hasSentGreeting.current = true
@@ -239,10 +232,9 @@ export default function WhatsAppPage() {
           "ai-saban": [...(prev["ai-saban"] || []), greetingMessage],
         }))
       } catch {
-        // If the API is unreachable, add a graceful fallback greeting
         const fallback: Message = {
           id: `ai-greeting-fallback-${Date.now()}`,
-          text: "Welcome to H. Saban Logistics. I'm your AI assistant \u2014 ready to help with shipment tracking, dispatch, route planning, and more. How can I assist you today?",
+          text: "ברוכים הבאים ל-ח. סבן לוגיסטיקה. אני עוזר ה-AI שלכם — מוכן לעזור במעקב משלוחים, שיגור, תכנון מסלולים ועוד. איך אוכל לעזור היום?",
           sender: "ai",
           time: getTimeStr(),
         }
@@ -262,7 +254,6 @@ export default function WhatsAppPage() {
     async (text: string) => {
       const timeStr = getTimeStr()
 
-      // 1. Add the user message immediately
       const userMessage: Message = {
         id: `user-${Date.now()}`,
         text,
@@ -276,7 +267,6 @@ export default function WhatsAppPage() {
         [activeChat]: [...(prev[activeChat] || []), userMessage],
       }))
 
-      // 2. Call the API for a real AI response
       setIsThinking(true)
       try {
         const reply = await callAssistantAPI(text)
@@ -291,7 +281,6 @@ export default function WhatsAppPage() {
           [activeChat]: [...(prev[activeChat] || []), aiMessage],
         }))
 
-        // Update the user message status to "read"
         setAllMessages((prev) => ({
           ...prev,
           [activeChat]: (prev[activeChat] || []).map((m) =>
@@ -299,10 +288,9 @@ export default function WhatsAppPage() {
           ),
         }))
       } catch {
-        // On API failure, show a graceful error message from the AI
         const errorMessage: Message = {
           id: `ai-error-${Date.now()}`,
-          text: "I\u2019m having trouble connecting right now. Please try again in a moment.",
+          text: "אני מתקשה להתחבר כרגע. אנא נסה שנית בעוד רגע.",
           sender: "ai",
           time: getTimeStr(),
         }
@@ -318,8 +306,7 @@ export default function WhatsAppPage() {
   )
 
   return (
-    <main className="flex h-dvh w-full bg-[var(--wa-chat-bg)]">
-      {/* Sidebar */}
+    <main className="flex h-dvh w-full bg-[var(--wa-chat-bg)]" dir="rtl">
       <ChatSidebar
         contacts={contacts}
         activeChat={activeChat}
@@ -328,11 +315,10 @@ export default function WhatsAppPage() {
         onClose={() => setSidebarOpen(false)}
       />
 
-      {/* Chat Area */}
       <div className="flex flex-1 flex-col min-w-0">
         <ChatHeader
-          name={currentContact?.name || "Chat"}
-          status="Online"
+          name={currentContact?.name || "צ'אט"}
+          status="מחובר"
           avatar={currentContact?.avatar || "?"}
           onToggleSidebar={() => setSidebarOpen(true)}
         />
