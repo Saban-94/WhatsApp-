@@ -1,5 +1,17 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --wa-chat-bg: #efeae2;
+  --wa-header-bg: #f0f2f5;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+}
 
 @custom-variant dark (&:is(.dark *));
 
