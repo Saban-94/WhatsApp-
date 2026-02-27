@@ -2,15 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --wa-chat-bg: #efeae2;
-  --wa-header-bg: #f0f2f5;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --border: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    --wa-chat-bg: #efeae2;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  direction: rtl;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    direction: rtl;
+  }
 }
 
 @custom-variant dark (&:is(.dark *));
