@@ -2,43 +2,34 @@
   "name": "my-project",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18.18 <20 || >=20.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "patch -p0 -r -f --silent < /dev/null || true"
   },
   "dependencies": {
-    "next": "15.3.0",
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.98.0",
+    "lucide-react": "^0.575.0",
+    "next": "^16.1.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "@google/generative-ai": "^0.21.0",
-    "@supabase/supabase-js": "^2.45.4",
-    "@vercel/analytics": "^1.4.1",
-    "lucide-react": "^0.454.0",
-    "tailwindcss-animate": "^1.0.7",
-    "tailwind-merge": "^2.5.4",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "cmdk": "^1.0.0",
-    "date-fns": "^4.1.0",
-    "zod": "^3.23.8",
-    "@radix-ui/react-dialog": "^1.1.2",
-    "@radix-ui/react-slot": "^1.1.0"
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@types/node": "^22.13.4",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
-    "eslint": "^9.15.0",
-    "eslint-config-next": "15.3.0",
-    "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14",
-    "typescript": "5.7.3"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp"
-    ]
+    "eslint": "^9.39.3",
+    "eslint-config-next": "16.1.6",
+    "postcss": "^8.4.49",
+    "autoprefixer": "^10.4.19",
+    "tailwindcss": "^3.4.19"
   }
 }
