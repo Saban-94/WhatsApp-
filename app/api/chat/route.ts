@@ -10,7 +10,9 @@ const supabase = createClient(
 
 // רשימת מפתחות Gemini למניעת חסימות (Load Balancing)
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-
+export async function GET() {
+  return Response.json({ status: "OK - API is alive" });
+}
 export async function POST(req: Request) {
   try {
     const { message, history } = await req.json();
