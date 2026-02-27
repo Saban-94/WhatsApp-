@@ -1,32 +1,30 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --border: 214.3 31.8% 91.4%;
-  --wa-chat-bg: #efeae2;
+@theme {
+  --color-border: hsl(214.3 31.8% 91.4%);
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(222.2 84% 4.9%);
+  --color-primary: hsl(221.2 83.2% 53.3%);
+  --color-whatsapp-chat: #efeae2;
+  --color-whatsapp-header: #f0f2f5;
+  
+  --radius-lg: 0.5rem;
 }
 
 @layer base {
   * {
-    /* שימוש בכתובת ישירה במקום בקיצור שבור */
-    border-color: hsl(214.3 31.8% 91.4%);
+    @apply border-border;
   }
   body {
-    background-color: white;
-    color: #111b21;
+    @apply bg-background text-foreground;
     direction: rtl;
+    text-align: right;
     margin: 0;
+    font-family: sans-serif;
   }
 }
 
-/* עיצוב בסיסי לצ'אט שיעבוד גם אם Tailwind נכשל חלקית */
-main {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  background-color: var(--wa-chat-bg);
+/* הגדרה ידנית למקרה שה-@apply עושה בעיות בבילד */
+.wa-bg {
+  background-color: #efeae2;
 }
